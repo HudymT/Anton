@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Form</title>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+    <script type="text/javascript">
+        (function() {
+            // https://dashboard.emailjs.com/admin/integration
+            emailjs.init('user_LN8qXWd80BRlgM3Fa0f2T');
+        })();
+    </script>
+    <script type="text/javascript">
+        window.onload = function() {
+            document.getElementById('contact-form').addEventListener('submit', function(event) {
+                event.preventDefault();
+                // generate a five digit number for the contact_number variable
+                this.contact_number.value = Math.random() * 100000 | 0;
+                // these IDs from the previous steps
+                emailjs.sendForm('service_qa632hp', 'template_xudshm9', this)
+                    .then(function() {
+                        console.log('SUCCESS!');
+                    }, function(error) {
+                        console.log('FAILED...', error);
+                    });
+            });
+        }
+    </script>
+</head>
+
+<body>
+    <form action="" id="contact-form">
+        <input type="hidden" name="contact_number">
+        <p>
+            <label for="">name</label>
+            <input type="text" name="name-user">
+        </p>
+        <p>
+            <label for="">email</label>
+            <input type="email" name="email-user">
+        </p>
+        <p>
+            <label for="">Surname</label>
+            <input type="tel" name="phone-number">
+        </p>
+        
+        <p>
+            <fieldset>
+                <legend>gender</legend>
+                <p><input type="radio"  name="male">male</p>
+            <p><input type="radio"  name="male">female</p>
+            </fieldset>
+            
+        </p>
+        <p>country</p>
+    
+        <select name="country" id="">
+            <option value="">Ternivskii</option>
+        <option value="">Saksaganskii</option>
+        <option value="">Centre-town</option>
+        </select>
+        
+        <p>
+            <p>
+                <label for="">впечатления</label>
+                <textarea name="opinion" id="" cols="30" rows="10"></textarea>
+            </p>
+            <p>drink</p>
+            <fieldset>
+                <p><input type="checkbox" >water</p>
+            
+                <p><input type="checkbox" >cofe</p>
+                <p><input type="checkbox" >lemonade</p>
+            </fieldset>
+    
+        </p>
+        
+        <button type="submit" value="send">
+            Send
+        </button>
+        <button type="reset" value="Clear">
+            Clear
+        </button>
+        
+    </form>
+</body>
+</html>
